@@ -22,12 +22,12 @@ class HomeView extends GetView<HomeController> {
                 LButton(
                   title: '-',
                   color: Colors.red,
-                  onTap: () => Get.toNamed('/login', arguments: '-'),
+                  onTap: () => Get.toNamed('/qr_scan', arguments: '-'),
                 ),
                 LButton(
                   title: '+',
                   color: Colors.blue,
-                  onTap: () => Get.toNamed('/login', arguments: '+'),
+                  onTap: () => Get.toNamed('/qr_scan', arguments: '+'),
                 ),
               ],
             ),
