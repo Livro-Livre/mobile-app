@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:livro_livre/api/firestore_api.dart';
 import 'package:livro_livre/dashboard/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -100,7 +101,8 @@ class DashboardView extends GetView<DashboardController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: OutlinedButton(
-                            onPressed: () async => print("continuar"),
+                            onPressed: () async =>
+                                FirestoreApi().addToBorrows(controller.item),
                             child: const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text('CONTINUAR'),
