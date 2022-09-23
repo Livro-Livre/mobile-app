@@ -4,9 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:livro_livre/model/biblio_item.dart';
 import 'package:livro_livre/util/marc_parser.dart';
 
+//Classe API com métodos de integração
+//entre o Koha e o Flutter.s
 class KohaAPI {
   static Map<String, String> headers = {};
 
+  //Koha hard coded login - single super user
   Future<bool> login() async {
     var url =
         Uri.http('biblioteca-intra.fac.unb.br', '/cgi-bin/koha/mainpage.pl');
@@ -33,6 +36,7 @@ class KohaAPI {
     }
   }
 
+  //Get json form external API using HTTP
   Future<Map<String, dynamic>> getJSON(
       String path, Map<String, String> headers) async {
     var url = Uri.http('biblioteca-intra.fac.unb.br', path);
@@ -50,6 +54,7 @@ class KohaAPI {
     return result;
   }
 
+  //Get and parse Marc encoded item to Json encoded item.
   Future<BiblioItem> getBiblioItem(String id) async {
     if (headers['cookie'] == null) {
       bool loginStatus = await login();
