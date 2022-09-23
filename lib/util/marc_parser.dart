@@ -1,5 +1,7 @@
 import 'package:livro_livre/model/biblio_item.dart';
 
+//Recebe um objeto biblioItem e um Map em Marc/Json e
+//retorna o objeto com seu devido encode.
 class MarcParser {
   static BiblioItem parseBiblio(
       BiblioItem biblioItem, Map<String, dynamic> marcInJSON) {

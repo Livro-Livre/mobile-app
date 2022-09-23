@@ -16,15 +16,15 @@ class BiblioItem {
   @override
   String toString() {
     Map<String, dynamic> map = {
-      "itemId": this.itemId,
-      "biblioId": this.biblioId,
-      "title": this.title,
-      "subtitle": this.subtitle,
-      "author": this.author,
-      "itemType": this.itemType,
-      "pages": this.pages,
-      "publisher": this.publisher,
-      "publication": this.publication,
+      "itemId": itemId,
+      "biblioId": biblioId,
+      "title": title,
+      "subtitle": subtitle,
+      "author": author,
+      "itemType": itemType,
+      "pages": pages,
+      "publisher": publisher,
+      "publication": publication,
     };
     return map.toString();
   }

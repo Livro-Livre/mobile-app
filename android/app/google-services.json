@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329305730892",
+    "project_id": "teste-livro-livre",
+    "storage_bucket": "teste-livro-livre.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329305730892:android:eb80d894a9417d3f6269e9",
+        "android_client_info": {
+          "package_name": "com.example.livro_livre"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329305730892-4e0uno5egrma606j4071b89ksugoc3fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC4kdSMI7iVvTiwIEQbypoME8B-RudcNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329305730892-4e0uno5egrma606j4071b89ksugoc3fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

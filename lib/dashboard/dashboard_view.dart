@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:livro_livre/api/firestore_api.dart';
 import 'package:livro_livre/dashboard/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -26,14 +27,22 @@ class DashboardView extends GetView<DashboardController> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Center(
+                        Center(
                           child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Você está alugando:',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Get.parameters['type'] == '+'
+                                ? const Text(
+                                    'Você está devolvendo:',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                : const Text(
+                                    'Você está alugando:',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                           ),
                         ),
                         Center(
@@ -48,49 +57,52 @@ class DashboardView extends GetView<DashboardController> {
                         ),
                       ],
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text(
-                              'REGRAS',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('* - Lorem ipsum dolor sit amet'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('* - Consectetur adipiscing elit.'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('* - Maecenas non magna in libero.'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('* - In luctus quis turpis eu bibendum.'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('* - Vehicula eget ultricies seds.'),
-                        ),
-                      ],
-                    ),
+                    Get.parameters['type'] == '-'
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(32.0),
+                                  child: Text(
+                                    'REGRAS',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text('1 - Cuide bem do livro.'),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text('2 - Não empreste para terceiros.'),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                    '3 - Tente devolver assim que terminar a leitura.'),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                    '4 - Ao devolver, escaneie o qr-code no modo devolução.'),
+                              ),
+                            ],
+                          )
+                        : const SizedBox(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 32.0),
                           child: OutlinedButton(
-                            onPressed: () async => Get.offAllNamed("/home"),
+                            onPressed: () async =>
+                                await Get.offAllNamed("/home"),
                             child: const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text('CANCELAR'),
@@ -100,7 +112,33 @@ class DashboardView extends GetView<DashboardController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: OutlinedButton(
-                            onPressed: () async => print("continuar"),
+                            onPressed: () async {
+                              if (Get.parameters['type'] == '+') {
+                                FirestoreApi().markAsReturned(controller.item);
+                                await Get.offAllNamed("/home");
+                              } else {
+                                FirestoreApi().addToBorrows(controller.item);
+                                await Get.dialog(
+                                  const Center(
+                                    child: SizedBox(
+                                      width: 200,
+                                      height: 160,
+                                      child: Card(
+                                        child: Center(
+                                          child: Text(
+                                            'Obrigado!',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                await Get.offAllNamed("/home");
+                              }
+                            },
                             child: const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text('CONTINUAR'),
