@@ -36,7 +36,12 @@ para compilar e executar
 
 ## Development
 
-[![Bruno B.](https://i.imgur.com/88vcXCx.png)](https://github.com/Jaxiii) Bruno S. R. de Barros - 18/0046063
+- [![Bruno B.](https://i.imgur.com/88vcXCx.png)](https://github.com/Jaxiii) Bruno S. R. de Barros - 18/0046063
+- Davi Garcia - 16/0070040
+- João Victor de S. Calassio - 18/0033808
+- Johnatan Amorim - 20/2043862
+- Pedro Rocha - 18/0054635
+
 #
 
 #
